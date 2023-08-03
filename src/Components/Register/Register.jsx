@@ -1,10 +1,11 @@
 import axios from "axios";
 import Joi from "joi";
-import { error } from "jquery";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+///////// register with joi /////////
 
 function Register() {
-  // ----initial value
   let [userData, setUserData] = useState({
     first_name: "",
     last_name: "",
@@ -14,6 +15,11 @@ function Register() {
   });
 
   let [errors, setValidationsErrors] = useState([]);
+  let [apiErrors, setApiErrors] = useState(null);
+  let [loading, setLoading] = useState(false);
+  //to navigate to another page
+  let navigate = useNavigate()
+
 
   // ----update data
   function handleChange(e) {
@@ -37,7 +43,7 @@ function Register() {
         tlds: { allow: false },
         // ["com", "net"] -----replace with false if i want to allow spicify domains
       }),
-      password: Joi.string().pattern(new RegExp(/^[a-z][A-Z]{3-8}$/)),
+      password: Joi.string().pattern(new RegExp()),
       age: Joi.number().min(16).max(50),
     });
 
@@ -57,14 +63,25 @@ function Register() {
   // ---------post data on submit form
   async function register(e) {
     e.preventDefault();
-
     // check if validation fun is true or false before calling api
     if (validatForm()) {
+      setLoading(true)
       let { data } = await axios.post(
         `https://movies-api.routemisr.com/signup`,
         userData
       );
       console.log(data);
+      //navigate to another page => login
+      if (data.message === "success") {
+        navigate("/login")
+        setLoading(false)
+        setApiErrors(null);
+
+      } else {
+        // calling api error
+        setApiErrors(data.message);
+        setLoading(false)
+      }
     }
   }
   // ------use effect to listen on data change
@@ -76,9 +93,9 @@ function Register() {
       <div className="container">
         <div className="mx-auto w-75">
           <h3 className="mt-5 mb-4">Registration Form</h3>
-          {/* {errors.map((error) => (
-            <div className="alert alert-danger">{error.message}</div>
-          ))} */}
+          {apiErrors && (
+            <div className="alert alert-danger">{apiErrors}</div>
+          )}
 
           <form onSubmit={(e) => register(e)}>
             <div className="form-group mb-4">
@@ -149,7 +166,7 @@ function Register() {
               }
             </div>
             <button className="btn btn-info d-flex ms-auto pb-5">
-              Register
+              {loading ? <i className="fa fa-spinner fa-spin"></i> : "register"}
             </button>
           </form>
         </div>

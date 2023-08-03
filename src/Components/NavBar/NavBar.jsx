@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
-function NavBar() {
+function NavBar(props) {
+  console.log(props.userData, ".....");
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-dark navbar-dark py-3">
@@ -20,7 +21,7 @@ function NavBar() {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            {props.userData ? <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <Link className="nav-link active" to="home">
                   Home
@@ -55,7 +56,8 @@ function NavBar() {
                   Network
                 </Link>
               </li>
-            </ul>
+            </ul> : ""}
+
             {/* we add it all in a div to contain it */}
             <div className="d-flex ms-auto align-items-center">
               <form className="d-flex me-4">
@@ -82,21 +84,22 @@ function NavBar() {
                 </li>
               </ul>
               <ul className="navbar-nav mb-2 mb-lg-0">
-                <li className="nav-item">
+                {props.userData ? <li className="nav-item">
+                  <Link className="nav-link active" to="">
+                    Logout
+                  </Link>
+                </li> : <> <li className="nav-item">
                   <Link className="nav-link active" to="register">
                     Register
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <Link className="nav-link active" to="login">
-                    Login
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link active" to="login">
-                    Logout
-                  </Link>
-                </li>
+                  <li className="nav-item">
+                    <Link className="nav-link active" to="login">
+                      Login
+                    </Link>
+                  </li></>}
+
+
               </ul>
             </div>
           </div>
