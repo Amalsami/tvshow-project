@@ -2,6 +2,9 @@ import Card from "../Card/Card.jsx";
 import axios from "axios"
 import { useEffect, useState } from "react";
 import Loading from "../Loading/Loading.jsx";
+import { Offline } from "react-detect-offline";
+import DetectOffline from "../DetectOffline/DetectOffline.jsx";
+
 
 
 function Home() {
@@ -22,6 +25,7 @@ function Home() {
   })
   return (
     <div className="container">
+      <Offline><DetectOffline></DetectOffline></Offline>
       {loading ? <Loading></Loading> :
         <>
           <div className="row">
