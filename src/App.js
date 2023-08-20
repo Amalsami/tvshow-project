@@ -12,6 +12,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import MainLayout from "./Components/MainLayout/MainLayout.jsx";
 import { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
+import Loading from "./Components/Loading/Loading";
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
         { path: "about", element: <About></About> },
         { path: "network", element: <Network /> },
         { path: "people", element: <People /> },
+        { path: "loading", element: <Loading /> },
         { path: "*", element: <NotFound></NotFound> },
       ],
     },

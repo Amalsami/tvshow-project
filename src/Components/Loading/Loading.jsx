@@ -1,5 +1,8 @@
 function Loading() {
-  return <div>loading</div>;
+  return (
+    <div class="lds-ellipsis">
+      <div></div><div></div><div></div>
+    </div>);
 }
 
 export default Loading;
