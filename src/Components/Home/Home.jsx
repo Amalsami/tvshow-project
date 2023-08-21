@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Loading from "../Loading/Loading.jsx";
 import { Offline } from "react-detect-offline";
 import DetectOffline from "../DetectOffline/DetectOffline.jsx";
+import getTrending from "../ApiService/ApiService.jsx";
 
 
 
@@ -11,20 +12,20 @@ function Home() {
   const [movies, setMovies] = useState([])
   const [tv, setTv] = useState([])
   const [loading, setLoading] = useState(true)
-  async function getTrending(type, setdata) {
-    const data = await axios.get(`https://api.themoviedb.org/3/trending/${type}/day?api_key=62b0fc4666a7121de866ed1aa6ce36d7`)
-
-    setdata(data.data.results)
-    setLoading(false)
-    console.log(data.data.results);
-  }
 
   useEffect(() => {
-    getTrending("movie", setMovies)
-    getTrending("tv", setTv)
-  })
+    async function fetchData() {
+      const tv = await getTrending("tv")
+      const movie = await getTrending("movie")
+      setMovies(movie)
+      setTv(tv)
+      console.log(movie, tv);
+      setLoading(false)
+    }
+    fetchData()
+  }, [])
   return (
-    <div className="container">
+    <div className="container py-5">
       <Offline><DetectOffline></DetectOffline></Offline>
       {loading ? <Loading></Loading> :
         <>

@@ -13,22 +13,22 @@ import MainLayout from "./Components/MainLayout/MainLayout.jsx";
 import { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
 import Loading from "./Components/Loading/Loading";
-
+import Details from "./Components/Details/Details";
 
 function App() {
   let [userData, setUserData] = useState({});
   function saveUser() {
-    let token = localStorage.getItem("token")
+    let token = localStorage.getItem("token");
     var decoded = jwt_decode(token);
-    setUserData(decoded)
+    setUserData(decoded);
     console.log(decoded);
   }
   //check if there is token or not
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      saveUser()
+      saveUser();
     }
-  }, [])
+  }, []);
   const routes = createBrowserRouter([
     {
       path: "/",
@@ -43,6 +43,7 @@ function App() {
         { path: "network", element: <Network /> },
         { path: "people", element: <People /> },
         { path: "loading", element: <Loading /> },
+        { path: "details/:id/:type", element: <Details /> },
         { path: "*", element: <NotFound></NotFound> },
       ],
     },

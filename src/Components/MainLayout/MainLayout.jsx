@@ -9,7 +9,7 @@ function MainLayout(props) {
       <NavBar userData={props.userData}></NavBar>
       <Outlet></Outlet>
 
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
     </div>
   );
 }
