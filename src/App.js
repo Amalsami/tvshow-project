@@ -8,7 +8,11 @@ import About from "./Components/About/About.jsx";
 import People from "./Components/People/People.jsx";
 import Network from "./Components/Network/Network.jsx";
 import NotFound from "./Components/NotFound/NotFound.jsx";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  Navigate,
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
 import MainLayout from "./Components/MainLayout/MainLayout.jsx";
 import { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
@@ -16,7 +20,7 @@ import Loading from "./Components/Loading/Loading";
 import Details from "./Components/Details/Details";
 
 function App() {
-  let [userData, setUserData] = useState({});
+  let [userData, setUserData] = useState(null);
   function saveUser() {
     let token = localStorage.getItem("token");
     var decoded = jwt_decode(token);
@@ -29,21 +33,84 @@ function App() {
       saveUser();
     }
   }, []);
+  function ProtectedRoutes(props) {
+    console.log(props.children);
+    console.log(props);
+    if (localStorage.getItem("token") == null) {
+      return <Navigate to="/login"></Navigate>;
+    } else {
+      return props.children;
+    }
+  }
+  function logout() {
+    localStorage.removeItem("token");
+    setUserData(null);
+    return <Navigate to="/login"></Navigate>;
+  }
   const routes = createBrowserRouter([
     {
       path: "/",
-      element: <MainLayout userData={userData}></MainLayout>,
+      element: <MainLayout userData={userData} logout={logout}></MainLayout>,
       children: [
-        { path: "home", element: <Home /> },
+        {
+          path: "home",
+          element: (
+            <ProtectedRoutes>
+              <Home />
+            </ProtectedRoutes>
+          ),
+        },
         { path: "register", element: <Register></Register> },
         { path: "login", element: <Login saveUser={saveUser}></Login> },
-        { path: "movies", element: <Movies></Movies> },
-        { path: "tvShows", element: <TvShows></TvShows> },
-        { path: "about", element: <About></About> },
-        { path: "network", element: <Network /> },
-        { path: "people", element: <People /> },
+        {
+          path: "movies",
+          element: (
+            <ProtectedRoutes>
+              <Movies></Movies>
+            </ProtectedRoutes>
+          ),
+        },
+        {
+          path: "tvShows",
+          element: (
+            <ProtectedRoutes>
+              <TvShows></TvShows>
+            </ProtectedRoutes>
+          ),
+        },
+        {
+          path: "about",
+          element: (
+            <ProtectedRoutes>
+              <About></About>
+            </ProtectedRoutes>
+          ),
+        },
+        {
+          path: "network",
+          element: (
+            <ProtectedRoutes>
+              <Network />
+            </ProtectedRoutes>
+          ),
+        },
+        {
+          path: "people",
+          element: (
+            <ProtectedRoutes>
+              <People />
+            </ProtectedRoutes>
+          ),
+        },
         { path: "loading", element: <Loading /> },
-        { path: "details/:id/:type", element: <Details /> },
+        {
+          path: "details/:id/:type",
+          element: (
+            <ProtectedRoutes>
+              <Details />
+            </ProtectedRoutes>
+          ),
+        },
         { path: "*", element: <NotFound></NotFound> },
       ],
     },

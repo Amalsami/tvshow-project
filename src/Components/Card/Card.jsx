@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 function Card({ movie }) {
-  console.log(movie);
   return (
 
     <div className="col-md-2 position-relative ">

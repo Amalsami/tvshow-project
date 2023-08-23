@@ -14,7 +14,7 @@ function Movies() {
       const movie = await getTrending("movie")
       setMovies(movie)
       setLoading(false)
-      console.log(movie);
+      // console.log(movie);
     }
     fetchData()
   }, [])

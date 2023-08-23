@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 
 function NavBar(props) {
-  console.log(props.userData, ".....");
+  const { userData, logout } = props
+  console.log(userData, ".....");
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-dark navbar-dark py-3">
@@ -21,7 +22,7 @@ function NavBar(props) {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            {props.userData ? <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            {userData ? <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <Link className="nav-link active" to="home">
                   Home
@@ -84,27 +85,30 @@ function NavBar(props) {
                 </li>
               </ul>
               <ul className="navbar-nav mb-2 mb-lg-0">
-                {props.userData ? <li className="nav-item">
-                  <Link className="nav-link active" to="">
-                    Logout
-                  </Link>
-                </li> : <> <li className="nav-item">
-                  <Link className="nav-link active" to="register">
-                    Register
-                  </Link>
-                </li>
+                {userData ? (
                   <li className="nav-item">
-                    <Link className="nav-link active" to="login">
-                      Login
-                    </Link>
-                  </li></>}
-
-
+                    <span className="nav-link active" onClick={logout}>
+                      Logout
+                    </span>
+                  </li>
+                ) : (
+                  <>
+                    <li className="nav-item">
+                      <Link className="nav-link active" to="register">
+                        Register
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link className="nav-link active" to="login">
+                        Login
+                      </Link>
+                    </li>
+                  </>)}
               </ul>
             </div>
           </div>
         </div>
-      </nav>
+      </nav >
     </>
   );
 }

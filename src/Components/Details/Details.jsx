@@ -8,10 +8,10 @@ function Details() {
   const [details, setDetails] = useState(null)
   const [loading, setLoading] = useState(true)
 
-  console.log(id);
+  // console.log(id);
   async function getDetails() {
     const data = await axios.get(`https://api.themoviedb.org/3/${type}/${id}?api_key=62b0fc4666a7121de866ed1aa6ce36d7`)
-    console.log(data);
+    // console.log(data);
     setDetails(data)
     setLoading(false)
 

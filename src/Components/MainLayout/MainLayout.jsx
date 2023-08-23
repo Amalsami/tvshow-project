@@ -2,11 +2,11 @@ import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer";
 import { Outlet } from "react-router-dom";
 
-function MainLayout(props) {
-  console.log(props);
+function MainLayout({ userData, logout }) {
+  console.log(userData);
   return (
     <div>
-      <NavBar userData={props.userData}></NavBar>
+      <NavBar userData={userData} logout={logout} ></NavBar>
       <Outlet></Outlet>
 
       {/* <Footer></Footer> */}

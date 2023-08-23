@@ -165,7 +165,7 @@ function Register() {
                   ?.message
               }
             </div>
-            <button className="btn btn-info d-flex ms-auto pb-5">
+            <button className="btn btn-info d-flex ms-auto">
               {loading ? <i className="fa fa-spinner fa-spin"></i> : "register"}
             </button>
           </form>

@@ -11,7 +11,7 @@ function TvShows() {
       const tv = await getTrending("tv")
       setTvs(tv)
       setLoading(false)
-      console.log(tv);
+      // console.log(tv);
     }
     fetchData()
   }, [])

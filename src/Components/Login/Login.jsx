@@ -99,7 +99,7 @@ import Joi from "joi";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-///////// register with joi /////////
+///////// loginwith joi /////////
 
 function Login(props) {
   let [userData, setUserData] = useState({
@@ -147,7 +147,7 @@ function Login(props) {
   }
 
   // ---------post data on submit form
-  async function register(e) {
+  async function login(e) {
     e.preventDefault();
     // check if validation fun is true or false before calling api
     if (validatForm()) {
@@ -180,12 +180,12 @@ function Login(props) {
     <>
       <div className="container">
         <div className="mx-auto w-75">
-          <h3 className="mt-5 mb-4">Registration Form</h3>
+          <h3 className="mt-5 mb-4">Login Form</h3>
           {apiErrors && (
             <div className="alert alert-danger">{apiErrors}</div>
           )}
 
-          <form onSubmit={(e) => register(e)}>
+          <form onSubmit={(e) => login(e)}>
             <div className="form-group mb-4 ">
               <label htmlFor="email">Email</label>
               <input
@@ -214,8 +214,8 @@ function Login(props) {
                   ?.message
               }
             </div>
-            <button className="btn btn-info d-flex ms-auto pb-5">
-              {loading ? <i className="fa fa-spinner fa-spin"></i> : "register"}
+            <button className="btn btn-info d-flex ms-auto">
+              {loading ? <i className="fa fa-spinner fa-spin"></i> : "login"}
             </button>
           </form>
         </div>

@@ -19,7 +19,7 @@ function Home() {
       const movie = await getTrending("movie")
       setMovies(movie)
       setTv(tv)
-      console.log(movie, tv);
+      // console.log(movie, tv);
       setLoading(false)
     }
     fetchData()
@@ -36,7 +36,7 @@ function Home() {
                 <p className="">Watch them now on our app</p>
               </div>
             </div>
-            {movies?.slice(0, 10).map((movie) => <Card movie={movie}></Card>)}
+            {movies?.slice(0, 10).map((movie) => <Card movie={movie} key={movie.id}></Card>)}
           </div>
           <div className="row">
             <div className="col-4">
@@ -45,7 +45,7 @@ function Home() {
                 <p className="">Watch them now on our app</p>
               </div>
             </div>
-            {tv?.slice(0, 10).map((tv) => <Card movie={tv}></Card>)}
+            {tv?.slice(0, 10).map((tv) => <Card movie={tv} key={tv.id}></Card>)}
           </div>
         </>}
 
