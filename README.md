@@ -1,8 +1,7 @@
 # TV Shows Website with React
 
-**Project Status: Work in Progress**
 
-A TV Shows website project developed using React, offering a user experience reminiscent of popular streaming services. This project is currently a work in progress, with many exciting features and functionalities already implemented.
+A TV Shows website project developed using React, offering a user experience reminiscent of popular tv shows websites. This project have many exciting features and functionalities already implemented.
 
 ## Key Features
 
@@ -34,9 +33,7 @@ A TV Shows website project developed using React, offering a user experience rem
 
 We are actively working on the following enhancements for this project:
 
-- User profile and settings.
+- User profile 
 - Recommendations based on user preferences.
 - Enhanced search with filters.
-- Real-time updates for new shows and episodes.
-- Integration with external APIs for more content.
 
